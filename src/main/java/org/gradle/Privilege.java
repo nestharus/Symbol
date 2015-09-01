@@ -18,7 +18,9 @@ public class Privilege {
 	 *  ()
 	 */
 	public boolean test(Privilege other){
-		return this.set.containsAll(other.set);
+		if (other==null){return false;}
+		if (!(other instanceof Privilege)){return false;}
+		return other.set.containsAll(this.set);
 	}
 
 	public Privilege intersect(Privilege other){
