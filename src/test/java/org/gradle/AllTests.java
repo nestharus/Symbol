@@ -9,9 +9,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	PersonTest.class,
+	/*PersonTest.class,*/
 	PrivilegeTest.class,
-	SignatureTest.class
+	SymbolTest.class,
+	SignatureTest.class,
+	
+	QueryTest.class,
 })
 public class AllTests {
 
