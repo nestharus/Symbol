@@ -24,12 +24,6 @@ test {
     systemProperties 'property': 'value'
 }
 
-/*
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
-    }
+task generateUML << {
+	println "hello task"
 }
-*/
