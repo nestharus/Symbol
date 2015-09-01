@@ -9,12 +9,16 @@ public class Privilege {
 		this.set = ImmutableSet.of(this);
 	}
 	
+	public Privilege(Privilege p1, Privilege p2) {
+		this.set = ImmutableSet.<Privilege>builder().addAll(p1.set).addAll(p2.set).build();
+	}
+	
 	/**
 	 *	Test if the fiven privilege satesfies current privilege
 	 *  ()
 	 */
 	public boolean test(Privilege other){
-		return false;
+		return this.set.containsAll(other.set);
 	}
 
 	public Privilege intersect(Privilege other){
@@ -23,6 +27,6 @@ public class Privilege {
 
 	
 	public Privilege union(Privilege other){
-		return null;
+		return new Privilege(this, other);
 	}
 }
