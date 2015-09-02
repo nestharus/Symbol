@@ -23,27 +23,27 @@ public class PrivilegeTest {
 	public void testNulldoesNotSatesfyPrivilegeTest() {
 		Privilege priv = new Privilege();
 		Privilege priv2 = null;
-		assertFalse(priv.test(priv2));
+		assertFalse(priv.accepts(priv2));
 	}
 
 	@Test
 	public void testDistinctPrivilegeDoesNotSatesfyPrivilegeTest() {
 		Privilege priv = new Privilege();
 		Privilege priv2 = new Privilege();
-		assertFalse(priv.test(priv2));
+		assertFalse(priv.accepts(priv2));
 	}
 	
 	@Test
 	public void testSamePrivilegeDoesSatesfyTest() {
 		Privilege priv = new Privilege();
 		Privilege priv2 = priv;
-		assertTrue(priv.test(priv2));
+		assertTrue(priv.accepts(priv2));
 	}
 	
 	@Test
 	public void testUnionSatesfiesChildTest() {
 		Privilege priv = new Privilege();
 		Privilege priv2 = priv.union(new Privilege());
-		assertTrue(priv.test(priv2));
+		assertTrue(priv.accepts(priv2));
 	}
 }

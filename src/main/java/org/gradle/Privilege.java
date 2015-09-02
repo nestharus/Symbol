@@ -3,32 +3,33 @@ package org.gradle;
 import com.google.common.collect.ImmutableSet;
 
 public class Privilege {
-	ImmutableSet<Privilege> set;
-	
+	public static Privilege union(Privilege... privileges) {
+		ImmutableSet.Builder<Privilege> builder = ImmutableSet.builder();
+
+		for (Privilege privilege : privileges) {
+			builder.addAll(privilege.privileges.iterator());
+		} // if
+
+		return new Privilege(builder.build());
+	} // union
+
+	private final ImmutableSet<Privilege> privileges;
+
 	public Privilege() {
-		this.set = ImmutableSet.of(this);
-	}
-	
-	public Privilege(Privilege p1, Privilege p2) {
-		this.set = ImmutableSet.<Privilege>builder().addAll(p1.set).addAll(p2.set).build();
-	}
-	
+		this.privileges = ImmutableSet.of(this);
+	} // Privilege
+
+	private Privilege(ImmutableSet<Privilege> privileges) {
+		this.privileges = privileges;
+	} // Privilege
+
 	/**
-	 *	Test if the fiven privilege satesfies current privilege
-	 *  ()
+	 * Test if the given privilege satisfies current privilege
+	 *
+	 * @param providedPrivileges
+	 * @return whether provided privileges are accepted
 	 */
-	public boolean test(Privilege other){
-		if (other==null){return false;}
-		if (!(other instanceof Privilege)){return false;}
-		return other.set.containsAll(this.set);
-	}
-
-	public Privilege intersect(Privilege other){
-		return null;
-	}
-
-	
-	public Privilege union(Privilege other){
-		return new Privilege(this, other);
-	}
-}
+	public boolean accepts(Privilege providedPrivileges) {
+		return providedPrivileges.privileges.contains(this);
+	} // accepts
+} // Privilege
