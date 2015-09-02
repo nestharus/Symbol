@@ -1,13 +1,19 @@
-package org.gradle;
+package com.hiveworkshop.symbol;
 
 import com.google.common.collect.ImmutableSet;
 
-public class Privilege {
-	public static Privilege union(Privilege... privileges) {
+public class Privilege
+{
+	public static Privilege union(Privilege... privileges)
+	{
 		ImmutableSet.Builder<Privilege> builder = ImmutableSet.builder();
 
-		for (Privilege privilege : privileges) {
-			builder.addAll(privilege.privileges.iterator());
+		for (Privilege privilege : privileges)
+		{
+			if (privilege != null)
+			{
+				builder.addAll(privilege.privileges.iterator());
+			}
 		} // if
 
 		return new Privilege(builder.build());
@@ -15,11 +21,13 @@ public class Privilege {
 
 	private final ImmutableSet<Privilege> privileges;
 
-	public Privilege() {
+	public Privilege()
+	{
 		this.privileges = ImmutableSet.of(this);
 	} // Privilege
 
-	private Privilege(ImmutableSet<Privilege> privileges) {
+	private Privilege(ImmutableSet<Privilege> privileges)
+	{
 		this.privileges = privileges;
 	} // Privilege
 
@@ -29,7 +37,8 @@ public class Privilege {
 	 * @param providedPrivileges
 	 * @return whether provided privileges are accepted
 	 */
-	public boolean accepts(Privilege providedPrivileges) {
+	public boolean accepts(Privilege providedPrivileges)
+	{
 		return providedPrivileges.privileges.contains(this);
 	} // accepts
 } // Privilege

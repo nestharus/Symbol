@@ -1,9 +1,11 @@
-package org.gradle;
+package com.hiveworkshop.symbol;
 
-public class Signature {
+public class Signature
+{
 	public static final int INFINITY = Integer.MAX_VALUE;
 
-	public int distance(Signature signature) {
+	public int distance(Signature signature)
+	{
 		return this == signature ? 0 : INFINITY;
 	}
 
@@ -18,12 +20,14 @@ public class Signature {
 	 */
 
 	@Override
-	public boolean equals(Object object) {
+	public boolean equals(Object object)
+	{
 		return this == object;
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return super.hashCode();
 	}
 }
