@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.hiveworkshop.symbol.Privilege;
+import com.hiveworkshop.symbol.privilege.Privilege;
 
 public class PrivilegeTest
 {

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
+import com.hiveworkshop.symbol.privilege.Privilege;
 
 public class MapResolutionPhase<T extends Enum<T>> extends ResolutionPhase<T>
 {
