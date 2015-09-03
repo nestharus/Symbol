@@ -1,24 +1,32 @@
 package com.hiveworkshop.symbol;
 
+import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
 
-public abstract class ResolutionPhase<T extends Enum<T>>
+public abstract class ResolutionPhase
 {
+	protected static final Set<Symbol> emptySet = ImmutableSet.of();
+
 	private final Privilege requiredPrivileges;
 
-	public ResolutionPhase(Privilege requiredPrivileges)
+	protected ResolutionPhase(Privilege requiredPrivileges)
 	{
 		this.requiredPrivileges = requiredPrivileges;
 	}
 
-	public abstract boolean addSymbol(Symbol<T> symbol);
+	public abstract boolean addSymbol(Symbol symbol);
 
 	public Privilege getRequiredPrivileges()
 	{
 		return requiredPrivileges;
 	}
 
-	public abstract ImmutableSet<Symbol<T>> getSymbols(Privilege providedPrivileges, Signature signature);
+	public abstract Set<Symbol> getSymbols(Privilege providedPrivileges, Signature signature);
 
-	public abstract boolean removeSymbol(Symbol<T> symbol);
+	public abstract boolean isProxy();
+
+	public abstract boolean removeSymbol(Symbol symbol);
+
+	public abstract Symbol resolve(Privilege providedPrivileges, Signature signature);
 }

@@ -2,7 +2,7 @@ package com.hiveworkshop.symbol;
 
 import java.util.Arrays;
 
-public class Symbol<T extends Enum<T>>
+public class Symbol
 {
 	private final ResolutionPhase<T>[]	phases;
 	private final Signature				signature;

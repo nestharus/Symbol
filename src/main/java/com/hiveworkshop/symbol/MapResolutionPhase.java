@@ -8,8 +8,7 @@ import com.google.common.collect.ImmutableSet;
 
 public class MapResolutionPhase<T extends Enum<T>> extends ResolutionPhase<T>
 {
-	private static final Set<Symbol<Object>>	emptySet	= ImmutableSet.of();
-	private HashMap<Signature, Set<Symbol<T>>>	map;
+	private HashMap<Signature, Set<Symbol<T>>> map;
 
 	public MapResolutionPhase(Privilege requiredPrivileges)
 	{
@@ -32,28 +31,14 @@ public class MapResolutionPhase<T extends Enum<T>> extends ResolutionPhase<T>
 	}
 
 	@Override
-	public ImmutableSet<Symbol<T>> getSymbols(Privilege providedPrivileges, Signature signature)
+	public Set<Symbol<T>> getSymbols(Privilege providedPrivileges, Signature signature)
 	{
 		if (!this.getRequiredPrivileges().accepts(providedPrivileges))
 		{
-			return ImmutableSet.of();
+			return emptySet;
 		}
 
-		Set<Symbol<T>> set = map.getOrDefault(signature, null);
-		ImmutableSet.Builder<Symbol<T>> builder = ImmutableSet.builder();
-
-		if (set != null)
-		{
-			for (Symbol<T> symbol : set)
-			{
-				if (signature.distance(symbol.getSignature()) != Signature.INFINITY)
-				{
-					builder.add(symbol);
-				}
-			}
-		}
-
-		return builder.build();
+		return map.getOrDefault(signature, ImmutableSet.of());
 	}
 
 	@Override
